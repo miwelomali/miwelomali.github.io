@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kanojo, Okarishimasu</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <div class"logo">
+            <img class="google-logo" src="https://www.logo.wine/a/logo/Google_Search/Google_Search-Logo.wine.svg" </div>
+
+            <form action="https://google.com/search" id="my-form">
+                <input type="text" id="myInput" name="q" class="box" placeholder="Enter search text...">
+
+            </form>
+
+            <div>
+
+                <div class="buttons" id="myBtn" onclick="">
+                    <button type="submit" name="btnK" value="Google Search" class="button " form="my-form">Google
+                        Search</button>
+                    <button type="submit" name="btnI" value="I am Feeling Lucky" class="button " form="my-form">I'm
+                        Feeling Lucky</button>
+                    <p>Google.ca offered in: <a href="#">Kawaii</a></p>
+                </div>
+
+                <div class="footer">
+
+                    <span class="footer-left">
+                        <a href="#">Advertising</a>
+                        <a href="#">Business</a>
+                        <a href="#">About</a>
+                    </span>
+
+                    <span class="footer-right">
+                        <a href="#">Privacy</a>
+                        <a href="#">Terms</a>
+                        <a href="#">Settings</a>
+                        <a href="#">Use Google.com</a>
+                    </span>
+                </div>
+
+            </div>
+            <script>
+                var input = document.getElementById("myInput");
+                input.addEventListener("keyup", function (event) {
+                    if (event.keyCode === 13) {
+                        event.preventDefault();
+                        document.getElementById("myBtn").click();
+                    }
+                });
+            </script>
+
+</body>
+
+</html>
