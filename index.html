@@ -1,11 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Happy Birthday Cecy</title>
+    <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
-    
+    <div class="container">
+        <div class"logo"> <img class="google-logo"
+                src="https://www.logo.wine/a/logo/Google_Search/Google_Search-Logo.wine.svg" </div>
+
+            <form action="" id="my-form">
+                <input type="text" id="myInput" name="q" class="box"
+                    placeholder="Enter the desired gif (must be a link)..." />
+            </form>
+
+            <div>
+                <div class="buttons" id="myBtn" onclick="postLink()">
+                    <button type="button" name="btnK" class="button" form="my-form">
+                        Add Link
+                    </button>
+                    <p id="underText">
+                        El regalo debe de ser menor a 25 dolares, y debe de aceptar como
+                        metodo de pago PayPal o tarjeta de credito <a href="#">Kawaii</a>
+                    </p>
+                </div>
+            </div>
+            <script>
+                var input = document.getElementById("myInput");
+                input.addEventListener("keyup", function (event) {
+                    if (event.keyCode === 13) {
+                        event.preventDefault();
+                        document.getElementById("myBtn").click();
+                    }
+                });
+
+               async function postLink() {
+                    var linkValue = document.getElementById("my-form").elements[0].value;
+
+                    //console.log(isValidUrl(linkValue));
+                    if (isValidUrl(linkValue) == true) {
+                        const numLinks = await getLinkCount().then( (numLinks) => {console.log(numLinks)});
+                        console.log("There are " + numLinks + " Links");
+                        firebase.database().ref("StoredLinks").child(1).set({
+                         enlace: linkValue,
+                        });
+
+                        document.getElementById("my-form").innerHTML = "Link Added";
+                    } else {
+                        document.getElementById("underText").innerHTML =
+                            "Agrega un enlace valido UwU";
+                    }
+                }
+                async function getLinkCount() { //TODO arreglar esta mierda plox
+                   var currentSnapshot;
+                    var nombre =await firebase
+                       .database()
+                       .ref("StoredLinks")
+                       .on("value", function (snapshot) {
+                           currentSnapshot = snapshot.numChildren();
+                           console.log("Current Snapshot: " + currentSnapshot)
+                           return currentSnapshot;
+
+                       })
+                       
+                   return currentSnapshot;
+               }
+                /*
+                */
+
+                function isValidUrl(string) {
+                    try {
+                        new URL(string);
+                    } catch (_) {
+                        return false;
+                    }
+
+                    return true;
+                }
+            </script>
 </body>
+
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-database.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+
+<script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+        apiKey: "AIzaSyA77CIN12aOXwCZ-fgncYBJhFBVhJKW618",
+        authDomain: "postlinks-526b7.firebaseapp.com",
+        databaseURL: "https://postlinks-526b7.firebaseio.com",
+        projectId: "postlinks-526b7",
+        storageBucket: "postlinks-526b7.appspot.com",
+        messagingSenderId: "81005845553",
+        appId: "1:81005845553:web:e0925acaa61f46c2674910",
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+</script>
+
 </html>
