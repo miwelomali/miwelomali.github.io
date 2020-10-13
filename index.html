@@ -40,11 +40,7 @@
 
                async function postLink() {
                     var linkValue = document.getElementById("my-form").elements[0].value;
-
-                    //console.log(isValidUrl(linkValue));
                     if (isValidUrl(linkValue) == true) {
-                        const numLinks = await getLinkCount().then( (numLinks) => {console.log(numLinks)});
-                        console.log("There are " + numLinks + " Links");
                         firebase.database().ref("StoredLinks").child(1).set({
                          enlace: linkValue,
                         });
@@ -55,22 +51,6 @@
                             "Agrega un enlace valido UwU";
                     }
                 }
-                async function getLinkCount() { //TODO arreglar esta mierda plox
-                   var currentSnapshot;
-                    var nombre =await firebase
-                       .database()
-                       .ref("StoredLinks")
-                       .on("value", function (snapshot) {
-                           currentSnapshot = snapshot.numChildren();
-                           console.log("Current Snapshot: " + currentSnapshot)
-                           return currentSnapshot;
-
-                       })
-                       
-                   return currentSnapshot;
-               }
-                /*
-                */
 
                 function isValidUrl(string) {
                     try {
