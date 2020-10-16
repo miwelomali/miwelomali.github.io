@@ -10,23 +10,24 @@
 
 <body>
     <div class="container">
-        <div class"logo"> <img class="google-logo"
-                src="https://www.logo.wine/a/logo/Google_Search/Google_Search-Logo.wine.svg" </div>
+        <div class"logo"> <img class="google-logo" src="images/logo-cecy-icecream.png" </div>
 
             <form action="" id="my-form">
                 <input type="text" id="myInput" name="q" class="box"
-                    placeholder="Enter the desired gif (must be a link)..." />
+                    placeholder="Enter the desired gift (must be a link)..." />
             </form>
 
             <div>
                 <div class="buttons" id="myBtn" onclick="postLink()">
-                    <button type="button" name="btnK" class="button" form="my-form">
+                    <button type="button" name="btnK" class="button" form="my-form" id="btnClick">
                         Add Link
                     </button>
-                    <p id="underText">
+                    <p id="underText" class="important-text">
                         El regalo debe de ser menor a 25 dolares, y debe de aceptar como
                         metodo de pago PayPal o tarjeta de credito <a href="#">Kawaii</a>
                     </p>
+                    <p id="ut1" class="important-text">Puedes cambiar el enlace las veces que quieras</p>
+                    <p id="ut2" class="important-text"> Disponible hasta el domingo 18 de octubre </p>
                 </div>
             </div>
             <script>
@@ -38,14 +39,19 @@
                     }
                 });
 
-               async function postLink() {
+                async function postLink() {
                     var linkValue = document.getElementById("my-form").elements[0].value;
                     if (isValidUrl(linkValue) == true) {
                         firebase.database().ref("StoredLinks").child(1).set({
-                         enlace: linkValue,
+                            enlace: linkValue,
                         });
 
                         document.getElementById("my-form").innerHTML = "Link Added";
+                        document.getElementById('btnClick').style.visibility = 'hidden';
+                        document.getElementById("ut1").innerHTML = "Tkm";
+                        document.getElementById("ut2").innerHTML = "By @Dino";
+                        document.getElementById("underText").innerHTML =
+                            "El enlace ha sido guardado, disfruta de tu regalo UwU";
                     } else {
                         document.getElementById("underText").innerHTML =
                             "Agrega un enlace valido UwU";
